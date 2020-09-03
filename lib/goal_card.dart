@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 class GoalCard extends StatefulWidget {
   @override
   _GoalCardState createState() => _GoalCardState();
+
+  String actividad;
+  int tConcentracion;
+  int tDescanso;
+
 }
 
 class _GoalCardState extends State<GoalCard> {
@@ -12,7 +17,7 @@ class _GoalCardState extends State<GoalCard> {
     return Center(
      child: Container(
        margin: EdgeInsets.all(10),
-       width: anchoPantalla * 0.9,
+      //  width: anchoPantalla * 0.9,
        decoration: BoxDecoration(
          color: Color.fromRGBO(223, 255, 255, 1),
          borderRadius: BorderRadius.circular(15.0),
@@ -27,15 +32,27 @@ class _GoalCardState extends State<GoalCard> {
            ),
            Spacer(),
            Container(
-             padding: EdgeInsets.only(left: 10, bottom: 13),
              child:  _inputConcentracion(),
              width: anchoPantalla*0.15,
            ),
            Spacer(),
            Container(
-             padding: EdgeInsets.only(left: 10, bottom: 13),
              child:  _inputDescanso(),
              width: anchoPantalla*0.15,
+           ),
+           Spacer(),
+           Container(
+             width: anchoPantalla * 0.13,
+             child: FlatButton(
+               onPressed: (){
+                 print('Navegando');
+               },
+               child: Icon(
+                 Icons.arrow_forward_ios,
+                 size: anchoPantalla * 0.1,
+                 color: Colors.cyan[700],
+               )
+             ),
            ),
          ],
        ),
@@ -49,7 +66,8 @@ class _GoalCardState extends State<GoalCard> {
         labelStyle: TextStyle( fontSize: 13),
       ),
       onChanged: (activity){
-        print(activity);
+        widget.actividad = activity;
+        print("La actividad es ${widget.actividad}");
       },
     );
   }// _actividad Input
@@ -62,7 +80,8 @@ class _GoalCardState extends State<GoalCard> {
         labelStyle: TextStyle( fontSize: 13),
       ),
       onChanged: (tiempoConcentracion){
-        print(tiempoConcentracion);
+        widget.tConcentracion = (double.parse(tiempoConcentracion)).toInt();
+        print("tConcentracion = ${widget.tConcentracion }");
       },
     );
   }
@@ -75,7 +94,8 @@ class _GoalCardState extends State<GoalCard> {
         labelStyle: TextStyle( fontSize: 13),
       ),
       onChanged: (tiempoDescanso){
-        print(tiempoDescanso);
+        widget.tDescanso = (double.parse(tiempoDescanso)).toInt();
+        print("tDescanso = ${widget.tDescanso }");
       },
     );
   }
