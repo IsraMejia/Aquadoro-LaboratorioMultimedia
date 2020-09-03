@@ -1,3 +1,4 @@
+import 'package:aquadoroo/goal_card.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
@@ -10,6 +11,7 @@ class GoalsPage extends StatefulWidget {
 class  GoalsPageState extends State <GoalsPage> {
   @override
   Widget build(BuildContext context) {
+   
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -18,7 +20,15 @@ class  GoalsPageState extends State <GoalsPage> {
       ),
       body: Stack(
         children: [
-          Container(color: Colors.cyan[600])
+          Container(color: Colors.cyan[600]),
+          Column(
+
+            children: [
+              GoalCard(),
+              GoalCard(),
+              GoalCard(),
+            ],
+          ),
         ],
       ),
     );
