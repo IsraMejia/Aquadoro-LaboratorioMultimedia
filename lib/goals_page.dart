@@ -26,7 +26,6 @@ class  GoalsPageState extends State <GoalsPage> {
             children: [
               GoalCard(),
               GoalCard(),
-              GoalCard(),
             ],
           ),
         ],

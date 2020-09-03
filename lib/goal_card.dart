@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:aquadoroo/aquadoro.dart';
 
 class GoalCard extends StatefulWidget {
   @override
@@ -46,6 +47,22 @@ class _GoalCardState extends State<GoalCard> {
              child: FlatButton(
                onPressed: (){
                  print('Navegando');
+                 if( (widget.actividad != null) && 
+                      (widget.tConcentracion != null) &&
+                      (widget.tDescanso != null)
+                    ){//En caso de que no hayan campos nulos
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => Aquadoro(
+                        actividad: widget.actividad,
+                        tConcentracion: widget.tConcentracion,
+                        tDescanso:  widget.tDescanso,
+                      )
+                      )
+                    );
+                  print('Navegando se paso parametros');
+                 }else{
+                   //No hace nada si hay algun campo null
+                 }
                },
                child: Icon(
                  Icons.arrow_forward_ios,
@@ -59,6 +76,7 @@ class _GoalCardState extends State<GoalCard> {
      ),
    );
   }//build
+
   Widget _actividadInput(){
     return TextFormField (
       decoration: InputDecoration(
@@ -72,6 +90,8 @@ class _GoalCardState extends State<GoalCard> {
     );
   }// _actividad Input
   
+  
+
   Widget _inputConcentracion(){
     return TextFormField (
       keyboardType: TextInputType.numberWithOptions(decimal: true),
@@ -87,7 +107,7 @@ class _GoalCardState extends State<GoalCard> {
   }
 
   Widget _inputDescanso(){
-    return TextFormField (
+    return TextFormField ( 
       keyboardType: TextInputType.numberWithOptions(decimal: true),
       decoration: InputDecoration(
         labelText: "Relax",
