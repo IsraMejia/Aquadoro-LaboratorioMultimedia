@@ -28,11 +28,9 @@ class  GoalsPageState extends State <GoalsPage> {
     return Container(
       margin: EdgeInsets.only(top:5),
       child: SizedBox(
-        width: 250.0,
+        width: 350.0,
         child: FadeAnimatedTextKit(
-          onTap: () {
-              print("Tap Event");
-            },
+          repeatForever: true,
           text: [
             "¿Qué es lo realmente ",
             "importante?",
@@ -42,10 +40,11 @@ class  GoalsPageState extends State <GoalsPage> {
           ],
           textStyle: TextStyle(
               fontSize: 25.0, 
-              fontWeight: FontWeight.bold
+              color: Colors.blueGrey[50],
+              fontWeight: FontWeight.w600          
           ),
-          textAlign: TextAlign.start,
-          alignment: AlignmentDirectional.topStart // or Alignment.topLeft
+          textAlign: TextAlign.center,
+          alignment: AlignmentDirectional.bottomCenter // or Alignment.topLeft
         ),
     ),
   );
