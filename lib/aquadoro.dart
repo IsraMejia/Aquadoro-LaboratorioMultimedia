@@ -17,7 +17,13 @@ class Aquadoro extends StatefulWidget {
 
 class _AquadoroState extends State<Aquadoro> {
   String tipoActividad = 'Focus';
-  String tiempoPantalla = '12:00';
+  String tiempoPantalla;
+
+  @override
+  void initState() {
+    super.initState();
+    tiempoPantalla = '${widget.tConcentracion.toString()}:00';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +38,19 @@ class _AquadoroState extends State<Aquadoro> {
       body: Stack(
         children: [
           Container(color: Colors.cyan[600]),
-          _aquadoroStack(ancho),
+          Center(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                _aquadoroStack(ancho),
+                Expanded(child: Container()),
+                _botones(),
+                Expanded(child: Container()),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -75,6 +93,51 @@ class _AquadoroState extends State<Aquadoro> {
             ),
           ),
         ),
+      ],
+    );
+  }
+
+  Widget _botones() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: <Widget>[
+        RaisedButton(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            color: Colors.cyan[200],
+            child: Row(
+              children: <Widget>[
+                Text(
+                  'Reset',
+                  style: TextStyle(fontSize: 25, color: Colors.teal[900]),
+                ),
+                Icon(
+                  Icons.rotate_left,
+                  size: 25,
+                  color: Colors.teal[900],
+                ),
+              ],
+            ),
+            onPressed: () {}),
+        OutlineButton(
+            borderSide: BorderSide(
+                width: 3, color: Colors.blue[900], style: BorderStyle.solid),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            child: Row(
+              children: <Widget>[
+                Text(
+                  tipoActividad,
+                  style: TextStyle(fontSize: 25, color: Colors.indigo[800]),
+                ),
+                Icon(
+                  Icons.adjust,
+                  size: 25,
+                  color: Colors.blue[900],
+                )
+              ],
+            ),
+            onPressed: () {}),
       ],
     );
   }
