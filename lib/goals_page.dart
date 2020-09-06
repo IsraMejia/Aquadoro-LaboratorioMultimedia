@@ -1,6 +1,7 @@
 import 'package:aquadoroo/goal_card.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:flutter/semantics.dart';
 
 class GoalsPage extends StatefulWidget {
 
@@ -8,7 +9,11 @@ class GoalsPage extends StatefulWidget {
    GoalsPageState createState() =>  GoalsPageState();
 }
 
-class  GoalsPageState extends State <GoalsPage> {
+class  GoalsPageState extends State <GoalsPage> with TickerProviderStateMixin {
+
+  final List<GoalCard> _metas =[];
+  int index;
+
   @override
   Widget build(BuildContext context) {
    
@@ -22,10 +27,45 @@ class  GoalsPageState extends State <GoalsPage> {
         children: [
           Container(color: Colors.cyan[600]),
           Column(
-
             children: [
-              GoalCard(),
-              GoalCard(),
+              Flexible(
+                child: ListView.builder(
+                  itemBuilder: (_ , int index){
+                    return Dismissible(
+                      key: new UniqueKey(), 
+                      child: _metas[index],
+                      background: Container(
+                        margin: EdgeInsets.all(10),
+                        padding: EdgeInsets.only(left: 10),
+                        alignment: AlignmentDirectional.centerStart,
+                        color: Colors.deepOrange[700],
+                        child: Icon(Icons.delete_outline),
+                      ),
+                      onDismissed: (direccion){
+                        setState(() {
+                          print(_metas[index].actividad);
+
+                          _metas.removeAt(index);
+                          print("Despues de eliminar");
+                          print(_metas[index].actividad);
+                        });
+                      },
+                    );
+                  } ,//=> _metas[index],
+                  itemCount: _metas.length,
+                )
+              ),
+              FloatingActionButton(
+                onPressed: (){
+                  _agregarCard();
+                },
+                child: Icon(Icons.add_circle_outline,
+                  color: Colors.cyan[50],
+                  size: 50,
+                ),
+
+              ),
+              Container(height: 30,),
             ],
           ),
         ],
@@ -56,6 +96,28 @@ class  GoalsPageState extends State <GoalsPage> {
           alignment: AlignmentDirectional.bottomCenter // or Alignment.topLeft
         ),
     ),
-  );
+   );
   }
+
+  void _agregarCard(){
+    final animacionCards = new AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 600),
+    );
+
+    GoalCard meta = new GoalCard(
+      animationController: animacionCards,
+    );
+    setState(() {
+      _metas.insert( _metas.length, meta);
+    });
+    meta.animationController.forward();
+  }
+
+  @override
+  void dispose(){
+    for(GoalCard meta in _metas) meta.animationController.dispose();
+    super.dispose();
+  }
+
 }
