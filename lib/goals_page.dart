@@ -27,10 +27,10 @@ class  GoalsPageState extends State <GoalsPage> with TickerProviderStateMixin {
         children: [
           // Container(color: Colors.cyan[600]),
           fondoMetas(),
-          SafeArea(
+          SafeArea(//-----------------------
             child: Column(
               children: [
-                _fadeText(),
+                _fadeText()  ,
                 Flexible(
                   child: ListView.builder(
                     itemBuilder: (_ , int index){
