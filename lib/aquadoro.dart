@@ -20,7 +20,7 @@ class Aquadoro extends StatefulWidget {
 class _AquadoroState extends State<Aquadoro> {
   String tipoActividad = 'Focus';
   String tiempoPantalla;
-  int contador = 0;
+  int contador = 4;
 
   bool kindActivity = false;
 
@@ -331,7 +331,7 @@ class _AquadoroState extends State<Aquadoro> {
                                   '${widget.tDescanso.toString()}:00';
 
                               if (contador == 4) {
-                                //_mostrarAlerta();
+                                _mostrarAlerta(context);
                                 contador = 5;
                                 tiempoPantalla = '${30}:00';
                               } else {
@@ -454,5 +454,67 @@ class _AquadoroState extends State<Aquadoro> {
         ),
       ],
     );
+  }
+
+  void _mostrarAlerta(BuildContext context) {
+    showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (context) {
+          return AlertDialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            backgroundColor: Colors.teal[200],
+            elevation: 25,
+            title: Text(
+              '\t\t Felicidades :',
+              style: TextStyle(fontSize: 30, color: Colors.blue[900]),
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text(
+                  'Haz realido 5 pomodoros seguidos',
+                  style: TextStyle(fontSize: 20.5, color: Colors.indigo[900]),
+                ),
+                Text(
+                    'Te recomandamos dividir esta meta en una más pequeña para disminuir la carga',
+                    style: TextStyle(fontSize: 20, color: Colors.indigo[900])),
+                Text('¿Nos tomamos un descanso de 30 minutos?',
+                    style: TextStyle(fontSize: 20, color: Colors.indigo[900])),
+                Image.asset(
+                  'assets/AlertImage.png',
+                  fit: BoxFit.cover,
+                  height: 170,
+                )
+              ],
+            ),
+            actions: [
+              FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    'Subdividir',
+                    style:
+                        TextStyle(fontSize: 24, color: Colors.lightBlue[800]),
+                  )),
+              FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    setState(() {
+                      startState = 3;
+                      print('Se mando al startState 3 ');
+                    });
+                  },
+                  child: Text(
+                    'Descansar',
+                    style:
+                        TextStyle(fontSize: 24, color: Colors.lightBlue[700]),
+                  )),
+            ],
+          );
+        });
   }
 }
