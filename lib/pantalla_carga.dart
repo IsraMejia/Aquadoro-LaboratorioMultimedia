@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:splashscreen/splashscreen.dart';
 
 import 'package:aquadoroo/goals_page.dart';
@@ -18,7 +19,7 @@ class _PantallaDeCargaState extends State<PantallaDeCarga> {
       navigateAfterSeconds: GoalsPage(),
       title: Text(
         'Acuadoro',
-        style: TextStyle(
+        style: GoogleFonts.mansalva(
             fontWeight: FontWeight.bold,
             fontSize: 60.0,
             color: Colors.blueGrey[50]),

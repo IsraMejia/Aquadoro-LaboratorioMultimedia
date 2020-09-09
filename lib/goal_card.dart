@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:aquadoroo/aquadoro.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class GoalCard extends StatefulWidget {
-  
   GoalCard({
     this.animationController,
   });
@@ -15,148 +15,143 @@ class GoalCard extends StatefulWidget {
   int tDescanso;
 
   final AnimationController animationController;
-
 }
 
 class _GoalCardState extends State<GoalCard> {
   @override
   Widget build(BuildContext context) {
-  double anchoPantalla = MediaQuery.of(context).size.width;
+    double anchoPantalla = MediaQuery.of(context).size.width;
     return SizeTransition(
       sizeFactor: CurvedAnimation(
         parent: widget.animationController,
-       curve: Curves.linear,
+        curve: Curves.linear,
       ),
       axisAlignment: 0.0,
       child: Center(
-       child: Container(
-         margin: EdgeInsets.all(10),
-        //  width: anchoPantalla * 0.9,
-         decoration: BoxDecoration(
-           color: Color.fromRGBO(223, 255, 255, 1),
-           borderRadius: BorderRadius.circular(15.0),
-         ),
-         child: Row(
-           crossAxisAlignment: CrossAxisAlignment.start,
-           children: [
-             Container(
-               padding: EdgeInsets.only(left: 10, bottom: 13),
-               child:  _actividadInput(),
-               width: anchoPantalla*0.45,
-             ),
-             Spacer(),
-             Container(
-               child:  _inputConcentracion(),
-               width: anchoPantalla*0.15,
-             ),
-             Spacer(),
-             Container(
-               child:  _inputDescanso(),
-               width: anchoPantalla*0.15,
-             ),
-             Spacer(),
-             Container(
-               width: anchoPantalla * 0.13,
-               child: FlatButton(//-----------------------
-                 onPressed: (){
-                   print('Navegando');
-                   if( (widget.actividad != null) && 
-                        (widget.tConcentracion != null) &&
-                        (widget.tDescanso != null)
-                      ){//En caso de que no hayan campos nulos
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => Aquadoro(
-                          actividad: widget.actividad,
-                          tConcentracion: widget.tConcentracion,
-                          tDescanso:  widget.tDescanso,
-                        )
-                        )
-                      );
-                    print('Navegando se paso parametros');
-                   }else{
-                     //No hace nada si hay algun campo null
-                   }
-                 },
-                 child: Icon(
-                   Icons.arrow_forward_ios,
-                   size: anchoPantalla * 0.1,
-                   color: Colors.cyan[700],
-                 )
-               ),//---------------------------------------
-             ),
-           ],
-         ),
-       ),
-   ),
+        child: Container(
+          margin: EdgeInsets.all(10),
+          //  width: anchoPantalla * 0.9,
+          decoration: BoxDecoration(
+            color: Color.fromRGBO(223, 255, 255, 1),
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: EdgeInsets.only(left: 10, bottom: 13),
+                child: _actividadInput(),
+                width: anchoPantalla * 0.45,
+              ),
+              Spacer(),
+              Container(
+                child: _inputConcentracion(),
+                width: anchoPantalla * 0.15,
+              ),
+              Spacer(),
+              Container(
+                child: _inputDescanso(),
+                width: anchoPantalla * 0.15,
+              ),
+              Spacer(),
+              Container(
+                width: anchoPantalla * 0.13,
+                child: FlatButton(
+                    //-----------------------
+                    onPressed: () {
+                      print('Navegando');
+                      if ((widget.actividad != null) &&
+                          (widget.tConcentracion != null) &&
+                          (widget.tDescanso != null)) {
+                        //En caso de que no hayan campos nulos
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => Aquadoro(
+                                  actividad: widget.actividad,
+                                  tConcentracion: widget.tConcentracion,
+                                  tDescanso: widget.tDescanso,
+                                )));
+                        print('Navegando se paso parametros');
+                      } else {
+                        //No hace nada si hay algun campo null
+                      }
+                    },
+                    child: Icon(
+                      Icons.arrow_forward_ios,
+                      size: anchoPantalla * 0.1,
+                      color: Colors.cyan[700],
+                    )), //---------------------------------------
+              ),
+            ],
+          ),
+        ),
+      ),
     );
-  }//build
+  } //build
 
-  String initialActivity(){
-    if(widget.actividad ==null){
+  String initialActivity() {
+    if (widget.actividad == null) {
       return " ";
-    }else{
+    } else {
       return "${widget.actividad.toString()}";
     }
   }
 
-  String initialConcentracion(){
-    if(widget.tConcentracion ==null){
+  String initialConcentracion() {
+    if (widget.tConcentracion == null) {
       return " ";
-    }else{
+    } else {
       return "${widget.tConcentracion.toString()}";
     }
   }
 
-  String initialDescanso(){
-    if(widget.tDescanso ==null){
+  String initialDescanso() {
+    if (widget.tDescanso == null) {
       return " ";
-    }else{
+    } else {
       return "${widget.tDescanso.toString()}";
     }
   }
 
-  Widget _actividadInput(){
-    return TextFormField (
+  Widget _actividadInput() {
+    return TextFormField(
       initialValue: initialActivity(),
       decoration: InputDecoration(
         labelText: "Actividad",
-        labelStyle: TextStyle( fontSize: 13),
+        labelStyle: GoogleFonts.craftyGirls(fontSize: 13),
       ),
-      onChanged: (activity){
+      onChanged: (activity) {
         widget.actividad = activity;
         print("La actividad es ${widget.actividad}");
       },
     );
-  }// _actividad Input
-  
-  
+  } // _actividad Input
 
-  Widget _inputConcentracion(){
-    return TextFormField (
+  Widget _inputConcentracion() {
+    return TextFormField(
       initialValue: initialConcentracion(),
       keyboardType: TextInputType.numberWithOptions(decimal: true),
       decoration: InputDecoration(
         labelText: "Focus",
-        labelStyle: TextStyle( fontSize: 13),
+        labelStyle: GoogleFonts.craftyGirls(fontSize: 13),
       ),
-      onChanged: (tiempoConcentracion){
+      onChanged: (tiempoConcentracion) {
         widget.tConcentracion = (double.parse(tiempoConcentracion)).toInt();
-        print("tConcentracion = ${widget.tConcentracion }");
+        print("tConcentracion = ${widget.tConcentracion}");
       },
     );
   }
 
-  Widget _inputDescanso(){
-    return TextFormField ( 
-      initialValue: initialDescanso() ,
+  Widget _inputDescanso() {
+    return TextFormField(
+      initialValue: initialDescanso(),
       keyboardType: TextInputType.numberWithOptions(decimal: true),
       decoration: InputDecoration(
         labelText: "Relax",
-        labelStyle: TextStyle( fontSize: 13),
+        labelStyle: GoogleFonts.craftyGirls(fontSize: 13),
       ),
-      onChanged: (tiempoDescanso){
+      onChanged: (tiempoDescanso) {
         widget.tDescanso = (double.parse(tiempoDescanso)).toInt();
-        print("tDescanso = ${widget.tDescanso }");
+        print("tDescanso = ${widget.tDescanso}");
       },
     );
   }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Aquadoro extends StatefulWidget {
   Aquadoro({
@@ -20,7 +21,7 @@ class Aquadoro extends StatefulWidget {
 class _AquadoroState extends State<Aquadoro> {
   String tipoActividad = 'Focus';
   String tiempoPantalla;
-  int contador = 4;
+  int contador = 0;
 
   bool kindActivity = false;
 
@@ -48,31 +49,67 @@ class _AquadoroState extends State<Aquadoro> {
     double ancho = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Aquadoro'),
-        backgroundColor: Colors.cyan[600],
-      ),
-      body: Stack(
-        children: [
-          Container(color: Colors.cyan[600]),
-          Center(
-            child: Column(
-              children: [
-                SizedBox(height: 40),
-                _contadorAcuadoro(),
-                SizedBox(
-                  height: 20,
-                ),
-                _aquadoroStack(ancho),
-                Expanded(child: Container()),
-                _botones(),
-                Expanded(child: Container()),
-              ],
+      body: SafeArea(
+        child: Stack(
+          children: [
+            fondoPomodoro(),
+            Center(
+              child: Column(
+                children: [
+                  _nuestroApbar(context),
+                  SizedBox(height: 40),
+                  _contadorAcuadoro(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _aquadoroStack(ancho),
+                  Expanded(child: Container()),
+                  _botones(),
+                  Expanded(child: Container()),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
+    );
+  }
+
+  Widget fondoPomodoro() {
+    return Container(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(colors: <Color>[
+        Colors.cyan[400],
+        Colors.cyan[800],
+      ])),
+    );
+  }
+
+  Widget _nuestroApbar(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Container(
+          width: 50,
+          child: FlatButton(
+              padding: EdgeInsets.only(right: 10, top: 10),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Icon(Icons.arrow_back_ios,
+                  size: 35, color: Colors.cyan[100])),
+        ),
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.only(top: 10),
+            child: Text(widget.actividad,
+                style: GoogleFonts.craftyGirls(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.cyan[50])),
+          ),
+        ),
+      ],
     );
   }
 
@@ -226,13 +263,15 @@ class _AquadoroState extends State<Aquadoro> {
                 Center(
                   child: Text(
                     tipoActividad,
-                    style: TextStyle(fontSize: 25, color: Colors.blueGrey[50]),
+                    style: GoogleFonts.craftyGirls(
+                        fontSize: 25, color: Colors.blueGrey[50]),
                   ),
                 ),
                 Center(
                   child: Text(
                     tiempoPantalla,
-                    style: TextStyle(fontSize: 25, color: Colors.blueGrey[50]),
+                    style: GoogleFonts.craftyGirls(
+                        fontSize: 25, color: Colors.blueGrey[50]),
                   ),
                 ),
               ],
@@ -257,7 +296,8 @@ class _AquadoroState extends State<Aquadoro> {
                 children: <Widget>[
                   Text(
                     'Reset',
-                    style: TextStyle(fontSize: 25, color: Colors.teal[900]),
+                    style: GoogleFonts.craftyGirls(
+                        fontSize: 25, color: Colors.teal[900]),
                   ),
                   Icon(
                     Icons.rotate_left,
@@ -292,7 +332,8 @@ class _AquadoroState extends State<Aquadoro> {
                 children: <Widget>[
                   Text(
                     tipoActividad,
-                    style: TextStyle(fontSize: 25, color: Colors.indigo[800]),
+                    style: GoogleFonts.craftyGirls(
+                        fontSize: 25, color: Colors.indigo[800]),
                   ),
                   Icon(
                     (kindActivity) ? Icons.adjust : Icons.album,
