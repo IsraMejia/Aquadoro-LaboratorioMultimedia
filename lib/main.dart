@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Material App',
+      title: 'Acuadoro',
       routes: {
         'pantallaCarga': (BuildContext context) => PantallaDeCarga(),
         'goalsPage': (BuildContext context) => GoalsPage(),

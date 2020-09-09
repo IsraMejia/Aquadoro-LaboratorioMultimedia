@@ -25,7 +25,17 @@ dependencies:
     sdk: flutter
   splashscreen: ^1.2.0
   google_fonts: ^1.1.0
+  flutter_launcher_icons: ^0.7.5
+  flutter_launcher_name: "^0.0.1"
 
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/Acuadoro.png"
+  
+
+flutter_launcher_name:
+  name: "Acuadoro Multi"
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
