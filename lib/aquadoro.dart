@@ -49,11 +49,11 @@ class _AquadoroState extends State<Aquadoro> {
     double ancho = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: [
-            fondoPomodoro(),
-            Center(
+      body: Stack(
+        children: [
+          fondoPomodoro(),
+          SafeArea(
+            child: Center(
               child: Column(
                 children: [
                   _nuestroApbar(context),
@@ -69,8 +69,8 @@ class _AquadoroState extends State<Aquadoro> {
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
