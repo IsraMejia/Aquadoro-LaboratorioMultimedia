@@ -45,6 +45,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   animated_text_kit: ^2.2.0
+  flare_flutter: ^2.0.6
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -61,6 +62,7 @@ flutter:
   assets:
      - assets/Acuadoro.png
      - AlertImage.png
+     - assets/Aquadoroo.flr
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
