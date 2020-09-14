@@ -66,7 +66,7 @@ class _AquadoroState extends State<Aquadoro> {
                   SizedBox(
                     height: 20,
                   ),
-                  _aquadoroStack(ancho),
+                  _aquadoroStack(ancho, context),
                   Expanded(child: Container()),
                   _botones(),
                   Expanded(child: Container()),
@@ -243,12 +243,12 @@ class _AquadoroState extends State<Aquadoro> {
     }
   }
 
-  Widget _aquadoroStack(double ancho) {
+  Widget _aquadoroStack(double ancho , BuildContext context) {
     return Stack(
       children: <Widget>[
 
         Container(
-          width: 400,
+          width: 400 ,
           height : 400,
           child: FlareActor(
             'assets/Aquadoroo.flr',
@@ -269,7 +269,7 @@ class _AquadoroState extends State<Aquadoro> {
         // ),
         Positioned(
           top: 160,
-          left: ancho * 0.25,
+          left: 115,
           child: Container(
             height: 100,
             width: 170,
@@ -477,6 +477,7 @@ class _AquadoroState extends State<Aquadoro> {
                       setState(() {
                         botonDeshabilitado = true;
                         resetDeshabilitado = false;
+                        animacionActual = "LoopRelax";
                       });
 
                       tDescansoSeg = (30 * 60);
@@ -511,6 +512,12 @@ class _AquadoroState extends State<Aquadoro> {
                             }
                             tDescansoSeg--;
                           }
+
+                          
+                          if(tDescansoSeg < 11){
+                            animacionActual = "FinRelax";
+                          }
+
                         });
                       });
                     }
